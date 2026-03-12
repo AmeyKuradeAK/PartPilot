@@ -1,0 +1,22 @@
+# Binaries and executables
+tmp_engine.exe
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test Output
+*.test
+*.out
+
+# Environment Variables
+.env
+.env.local
+
+# Vendor
+vendor/
+
+# OS Files
+.DS_Store
+Thumbs.db
