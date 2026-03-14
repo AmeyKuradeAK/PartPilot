@@ -2,13 +2,13 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer style={{
+    <footer className="site-footer" style={{
       borderTop: '1px solid var(--border-light)',
       backgroundColor: 'var(--bg-surface)',
       fontFamily: 'var(--font-geist-mono), monospace',
       fontSize: '0.85rem'
     }}>
-      <div style={{
+      <div className="footer-grid" style={{
         maxWidth: '1400px',
         margin: '0 auto',
         padding: '4rem 2rem',
@@ -27,7 +27,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '4rem' }}>
+        <div className="footer-links" style={{ display: 'flex', gap: '4rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Infrastructure</div>
             <Link href="#" style={{ color: 'var(--text-secondary)' }}>Network Map</Link>
@@ -44,10 +44,10 @@ export default function Footer() {
 
       </div>
 
-      <div style={{
+      <div className="footer-bottom" style={{
         borderTop: '1px solid var(--border-light)',
       }}>
-        <div style={{
+        <div className="footer-bottom-inner" style={{
           maxWidth: '1400px',
           margin: '0 auto',
           padding: '1.5rem 2rem',

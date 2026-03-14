@@ -45,16 +45,16 @@ export default function Pricing() {
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: 'calc(100vh - 70px)' }}>
       {/* Header */}
-      <section style={{ padding: '6rem 2rem', borderBottom: '1px solid var(--border-light)' }}>
+      <section className="section-pad" style={{ padding: '6rem 2rem', borderBottom: '1px solid var(--border-light)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div className="tech-heading" style={{ color: 'var(--accent-orange)' }}>
             <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: 'var(--accent-orange)', marginRight: '8px' }}></span>
             NETWORK PRICING
           </div>
-          <h1 style={{ fontSize: '4rem', fontWeight: 800, letterSpacing: '-0.04em', margin: 0, color: 'var(--text-primary)' }}>
+          <h1 className="page-title" style={{ fontSize: '4rem', fontWeight: 800, letterSpacing: '-0.04em', margin: 0, color: 'var(--text-primary)' }}>
             Transparent topology scaling.
           </h1>
-          <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '800px', lineHeight: 1.6, marginTop: '1rem' }}>
+          <p className="page-lead" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '800px', lineHeight: 1.6, marginTop: '1rem' }}>
             Initiate locally for free. Upgrade tier parameters to unlock live API passthrough and LLM integrations.
           </p>
         </div>
@@ -62,9 +62,9 @@ export default function Pricing() {
 
       {/* Pricing Grid */}
       <section style={{ maxWidth: '1400px', margin: '0 auto', borderLeft: '1px solid var(--border-light)', borderRight: '1px solid var(--border-light)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+        <div className="pricing-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
           {tiers.map((tier, index) => (
-            <div key={tier.name} style={{
+            <div key={tier.name} className="pricing-card" style={{
               backgroundColor: tier.highlighted ? 'var(--bg-elevated)' : 'var(--bg-surface)',
               borderRight: index !== tiers.length - 1 ? '1px solid var(--border-light)' : 'none',
               borderBottom: '1px solid var(--border-light)',
@@ -96,7 +96,7 @@ export default function Pricing() {
                 {tier.name === 'Enterprise' ? 'Contact Sales' : 'Deploy Template'}
               </Link>
               
-              <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
+              <ul className="pricing-features" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
                 {tier.features.map((feature) => (
                   <li key={feature} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                     <Check size={18} style={{ color: tier.highlighted ? 'var(--accent-orange)' : 'var(--text-tertiary)', flexShrink: 0, marginTop: '2px' }} />

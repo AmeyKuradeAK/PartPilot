@@ -7,7 +7,7 @@ interface CodeBlockProps {
 
 export default function CodeBlock({ code, language = 'json' }: CodeBlockProps) {
   return (
-    <div style={{
+    <div className="code-block" style={{
       backgroundColor: '#050508',
       border: '1px solid var(--border)',
       borderRadius: '8px',
@@ -31,7 +31,7 @@ export default function CodeBlock({ code, language = 'json' }: CodeBlockProps) {
         </div>
         <span style={{ marginLeft: '1rem', fontSize: '0.75rem' }}>{language.toUpperCase()} Response</span>
       </div>
-      <pre style={{ 
+      <pre className="code-block-pre" style={{ 
         padding: '1.5rem', 
         overflowX: 'auto', 
         color: '#d4d4d8', 
