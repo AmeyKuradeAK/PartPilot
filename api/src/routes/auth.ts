@@ -6,7 +6,7 @@ import { query } from '../db';
 const router = Router();
 
 router.post('/register', async (req: Request, res: Response): Promise<void> => {
-  const { email, password } = req.body;
+  const { email, password } = req.body ?? {};
 
   if (!email || !password) {
     res.status(400).json({ error: 'Email and password are required' });
@@ -36,7 +36,7 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
 });
 
 router.post('/login', async (req: Request, res: Response): Promise<void> => {
-  const { email, password } = req.body;
+  const { email, password } = req.body ?? {};
 
   if (!email || !password) {
     res.status(400).json({ error: 'Email and password are required' });
