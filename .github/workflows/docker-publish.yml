@@ -12,8 +12,8 @@ permissions:
 
 jobs:
   build-and-push:
-    environment: Production
     runs-on: ubuntu-latest
+    environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,8 +30,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Extract metadata
-        id: meta
+      - name: Extract metadata (core-engine)
+        id: meta_engine
         uses: docker/metadata-action@v5
         with:
           images: docker.io/ameyk09/partpilot-engine
@@ -39,10 +39,27 @@ jobs:
             type=ref,event=branch
             type=sha,format=short
 
-      - name: Build and push
+      - name: Build and push (core-engine)
         uses: docker/build-push-action@v5
         with:
           context: ./core-engine
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta_engine.outputs.tags }}
+          labels: ${{ steps.meta_engine.outputs.labels }}
+
+      - name: Extract metadata (api)
+        id: meta_api
+        uses: docker/metadata-action@v5
+        with:
+          images: docker.io/ameyk09/partpilot-api
+          tags: |
+            type=ref,event=branch
+            type=sha,format=short
+
+      - name: Build and push (api)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./api
+          push: true
+          tags: ${{ steps.meta_api.outputs.tags }}
+          labels: ${{ steps.meta_api.outputs.labels }}
