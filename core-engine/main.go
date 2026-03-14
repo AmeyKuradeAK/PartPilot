@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -19,6 +20,29 @@ func main() {
 	cfg := config.Load()
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
+
+	// Lightweight health server for platforms that require an HTTP route.
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	healthServer := &http.Server{
+		Addr: ":" + port,
+		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path != "/" && r.URL.Path != "/health" {
+				http.NotFound(w, r)
+				return
+			}
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			w.WriteHeader(http.StatusOK)
+			_, _ = w.Write([]byte("ok"))
+		}),
+	}
+	go func() {
+		if err := healthServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Printf("Health server error: %v", err)
+		}
+	}()
 
 	// Connect to DB
 	db.Connect(ctx, cfg.DatabaseURL)
@@ -40,6 +64,7 @@ func main() {
 	go func() {
 		<-sigCh
 		log.Println("Shutting down gracefully...")
+		_ = healthServer.Shutdown(context.Background())
 		cancel()
 	}()
 
