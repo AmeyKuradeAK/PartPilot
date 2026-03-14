@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   build-and-push:
+    environment: Production
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
