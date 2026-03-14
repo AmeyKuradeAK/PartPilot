@@ -33,6 +33,7 @@ body {
   color: var(--text-primary);
   font-family: var(--font-geist-sans), Arial, sans-serif;
   letter-spacing: -0.01em;
+  overflow-x: hidden;
 }
 
 a {
@@ -115,6 +116,54 @@ a:hover {
 
 .mono {
   font-family: var(--font-geist-mono), monospace;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-left: auto;
+}
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 40px;
+  height: 36px;
+  border: 1px solid var(--border-light);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text-primary);
+}
+
+.code-block {
+  max-width: 100%;
+}
+
+.terminal-list li {
+  overflow-wrap: anywhere;
+}
+
+.terminal-grid,
+.docs-grid,
+.stage-row,
+.tech-grid {
+  min-width: 0;
+}
+
+.terminal-grid > *,
+.docs-grid > *,
+.stage-row > * {
+  min-width: 0;
 }
 
 /* Responsive layout adjustments without changing aesthetic */
@@ -211,13 +260,41 @@ a:hover {
   }
 
   .nav-main {
-    flex-direction: column !important;
-    align-items: flex-start !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     gap: 1rem !important;
+    flex-wrap: wrap;
+  }
+
+  .nav-menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-light);
+    order: 3;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    order: 2;
+  }
+
+  .nav-left {
+    order: 1;
   }
 
   .nav-links {
-    flex-wrap: wrap !important;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
     row-gap: 0.5rem;
   }
 
